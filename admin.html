@@ -182,6 +182,7 @@ body{font-family:'Cairo',sans-serif;background:var(--gray);color:var(--black);mi
     <div class="topbar-nav">
       <button class="tnav act" onclick="showTab('projects',this)">🎬 المشاريع</button>
       <button class="tnav" onclick="showTab('settings',this)">⚙️ إعدادات الموقع</button>
+      <button class="tnav" onclick="showTab('experience',this)">💼 الخبرة العملية</button>
       <button class="tnav" onclick="showTab('categories',this)">📁 الأقسام</button>
     </div>
     <button class="logout-btn" onclick="doLogout()">خروج</button>
@@ -431,6 +432,73 @@ body{font-family:'Cairo',sans-serif;background:var(--gray);color:var(--black);mi
       </div>
     </div>
 
+    <div class="tab-panel" id="tab-experience">
+      <div class="page-title">الخبرة العملية</div>
+      <div class="page-sub">أضف وعدّل وحذف وظائفك</div>
+
+      <!-- ADD NEW -->
+      <div class="card">
+        <div class="card-title">إضافة وظيفة جديدة</div>
+        <div class="form-grid">
+          <div class="fg">
+            <label class="flabel">المسمى الوظيفي</label>
+            <input type="text" class="finput" id="exp-role" placeholder="Motion Graphics Designer">
+          </div>
+          <div class="fg">
+            <label class="flabel">اسم الشركة</label>
+            <input type="text" class="finput" id="exp-company" placeholder="Artaholic">
+          </div>
+          <div class="fg">
+            <label class="flabel">تاريخ البداية</label>
+            <input type="text" class="finput" id="exp-start" placeholder="Dec 2024">
+          </div>
+          <div class="fg">
+            <label class="flabel">تاريخ النهاية</label>
+            <input type="text" class="finput" id="exp-end" placeholder="Present أو Oct 2024">
+          </div>
+          <div class="fg">
+            <label class="flabel">الموقع</label>
+            <input type="text" class="finput" id="exp-loc" placeholder="Remote · Saudi Arabia">
+          </div>
+          <div class="fg">
+            <label class="flabel">الحالة</label>
+            <select class="fselect" id="exp-status">
+              <option value="current">حالي (Present)</option>
+              <option value="ended">منتهي (Ended)</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="flabel">لون الكارد</label>
+            <select class="fselect" id="exp-color">
+              <option value="blue">أزرق 🔵</option>
+              <option value="purple">بنفسجي 🟣</option>
+              <option value="pink">زهري 🩷</option>
+              <option value="amber">ذهبي 🟡</option>
+              <option value="green">أخضر 🟢</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="flabel">الأعلام (Flags) — اختياري</label>
+            <input type="text" class="finput" id="exp-flags" placeholder="🇪🇬 🇸🇦">
+          </div>
+          <div class="fg full">
+            <label class="flabel">Tags (مفصولة بفاصلة)</label>
+            <input type="text" class="finput" id="exp-tags" placeholder="Branding Animation, Motion Graphics, Campaigns">
+          </div>
+        </div>
+        <button class="save-btn" onclick="addExperience()" style="margin-top:4px">إضافة الوظيفة</button>
+      </div>
+
+      <!-- LIST -->
+      <div class="card" style="padding:0;overflow:hidden">
+        <div style="padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px">
+          <span style="font-size:15px;font-weight:700">الوظائف</span>
+          <span id="exp-count" style="background:var(--lime);color:var(--black);border-radius:100px;padding:2px 10px;font-size:12px;font-weight:700">0</span>
+        </div>
+        <div id="exp-list" style="display:flex;flex-direction:column"></div>
+      </div>
+    </div>
+
     <!-- ═══ CATEGORIES TAB ═══ -->
     <div class="tab-panel" id="tab-categories">
       <div class="page-title">إدارة الأقسام</div>
@@ -477,6 +545,42 @@ body{font-family:'Cairo',sans-serif;background:var(--gray);color:var(--black);mi
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- EXPERIENCE EDIT MODAL -->
+<div class="moverlay" id="exp-edit-modal">
+  <div class="mbox" style="max-width:520px">
+    <div class="mtitle">تعديل الوظيفة</div>
+    <input type="hidden" id="exp-edit-id">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+      <div class="fg"><label class="flabel">المسمى الوظيفي</label><input type="text" class="finput" id="exp-edit-role"></div>
+      <div class="fg"><label class="flabel">اسم الشركة</label><input type="text" class="finput" id="exp-edit-company"></div>
+      <div class="fg"><label class="flabel">تاريخ البداية</label><input type="text" class="finput" id="exp-edit-start"></div>
+      <div class="fg"><label class="flabel">تاريخ النهاية</label><input type="text" class="finput" id="exp-edit-end"></div>
+      <div class="fg"><label class="flabel">الموقع</label><input type="text" class="finput" id="exp-edit-loc"></div>
+      <div class="fg"><label class="flabel">الحالة</label>
+        <select class="fselect" id="exp-edit-status">
+          <option value="current">حالي</option>
+          <option value="ended">منتهي</option>
+        </select>
+      </div>
+      <div class="fg"><label class="flabel">اللون</label>
+        <select class="fselect" id="exp-edit-color">
+          <option value="blue">أزرق</option>
+          <option value="purple">بنفسجي</option>
+          <option value="pink">زهري</option>
+          <option value="amber">ذهبي</option>
+          <option value="green">أخضر</option>
+        </select>
+      </div>
+      <div class="fg"><label class="flabel">Flags</label><input type="text" class="finput" id="exp-edit-flags"></div>
+    </div>
+    <div class="fg" style="margin-bottom:14px"><label class="flabel">Tags</label><input type="text" class="finput" id="exp-edit-tags"></div>
+    <div class="macts">
+      <button class="mcancel" onclick="closeExpEdit()">إلغاء</button>
+      <button class="msave" onclick="saveExpEdit()">حفظ</button>
+    </div>
   </div>
 </div>
 
@@ -545,6 +649,7 @@ function doLogin() {
     document.getElementById('main-screen').style.display = 'block';
     loadProjects();
     loadSettings();
+    loadExperience();
     renderSkills();
   } else {
     document.getElementById('login-err').style.display = 'block';
@@ -876,6 +981,108 @@ async function saveEdit() {
   closeEdit(); loadProjects();
 }
 document.getElementById('edit-modal').addEventListener('click', e => { if (e.target === document.getElementById('edit-modal')) closeEdit(); });
+
+// ══ EXPERIENCE ══
+let allExp = [];
+
+async function loadExperience() {
+  const { data } = await sb.from('experience').select('*').order('sort_order', { ascending: true });
+  allExp = data || [];
+  renderExpList();
+}
+
+function renderExpList() {
+  const list = document.getElementById('exp-list');
+  document.getElementById('exp-count').textContent = allExp.length;
+  const colors = { blue:'#0EA5E9', purple:'#8B5CF6', pink:'#EC4899', amber:'#F59E0B', green:'#10B981' };
+  if (!allExp.length) {
+    list.innerHTML = `<div style="padding:40px;text-align:center;color:var(--muted)">لا توجد وظائف بعد — ضيف أول وظيفة من فوق</div>`;
+    return;
+  }
+  list.innerHTML = allExp.map(e => `
+    <div style="display:grid;grid-template-columns:12px 1fr auto;gap:14px;align-items:center;padding:14px 24px;border-bottom:1px solid var(--border)">
+      <div style="width:12px;height:12px;border-radius:50%;background:${colors[e.color]||colors.blue};flex-shrink:0;box-shadow:0 0 6px ${colors[e.color]||colors.blue}"></div>
+      <div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:3px">${e.role} ${e.flags||''}</div>
+        <div style="font-size:12px;color:var(--muted)">${e.company} · ${e.start_date} – ${e.end_date}
+          ${e.status==='ended'?'<span style="font-size:10px;background:#f3f4f6;border-radius:4px;padding:1px 8px;color:#666;margin-right:4px">منتهي</span>':''}
+        </div>
+        <div style="font-size:11px;color:#999;margin-top:2px">${e.location||''}</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-shrink:0">
+        <button class="abt edit" onclick="openExpEdit(${e.id})">تعديل</button>
+        <button class="abt del" onclick="deleteExp(${e.id})">حذف</button>
+      </div>
+    </div>`).join('');
+}
+
+async function addExperience() {
+  const role = document.getElementById('exp-role').value.trim();
+  const company = document.getElementById('exp-company').value.trim();
+  if (!role || !company) { showToast('اكتب المسمى واسم الشركة', 'error'); return; }
+  const tags = document.getElementById('exp-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const { error } = await sb.from('experience').insert([{
+    role, company,
+    start_date: document.getElementById('exp-start').value.trim(),
+    end_date: document.getElementById('exp-end').value.trim() || 'Present',
+    location: document.getElementById('exp-loc').value.trim(),
+    status: document.getElementById('exp-status').value,
+    color: document.getElementById('exp-color').value,
+    flags: document.getElementById('exp-flags').value.trim(),
+    tags: JSON.stringify(tags),
+    sort_order: allExp.length + 1,
+  }]);
+  if (error) { showToast('خطأ: ' + error.message, 'error'); return; }
+  showToast('تمت الإضافة ✓', 'success');
+  ['exp-role','exp-company','exp-start','exp-end','exp-loc','exp-tags','exp-flags'].forEach(id => document.getElementById(id).value = '');
+  loadExperience();
+}
+
+function openExpEdit(id) {
+  const e = allExp.find(x => x.id === id);
+  if (!e) return;
+  document.getElementById('exp-edit-id').value = e.id;
+  document.getElementById('exp-edit-role').value = e.role||'';
+  document.getElementById('exp-edit-company').value = e.company||'';
+  document.getElementById('exp-edit-start').value = e.start_date||'';
+  document.getElementById('exp-edit-end').value = e.end_date||'';
+  document.getElementById('exp-edit-loc').value = e.location||'';
+  document.getElementById('exp-edit-status').value = e.status||'current';
+  document.getElementById('exp-edit-color').value = e.color||'blue';
+  document.getElementById('exp-edit-flags').value = e.flags||'';
+  document.getElementById('exp-edit-tags').value = e.tags ? JSON.parse(e.tags).join(', ') : '';
+  document.getElementById('exp-edit-modal').classList.add('open');
+}
+function closeExpEdit() { document.getElementById('exp-edit-modal').classList.remove('open'); }
+document.getElementById('exp-edit-modal').addEventListener('click', e => { if(e.target===document.getElementById('exp-edit-modal'))closeExpEdit(); });
+
+async function saveExpEdit() {
+  const id = document.getElementById('exp-edit-id').value;
+  const tags = document.getElementById('exp-edit-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const { error } = await sb.from('experience').update({
+    role: document.getElementById('exp-edit-role').value.trim(),
+    company: document.getElementById('exp-edit-company').value.trim(),
+    start_date: document.getElementById('exp-edit-start').value.trim(),
+    end_date: document.getElementById('exp-edit-end').value.trim(),
+    location: document.getElementById('exp-edit-loc').value.trim(),
+    status: document.getElementById('exp-edit-status').value,
+    color: document.getElementById('exp-edit-color').value,
+    flags: document.getElementById('exp-edit-flags').value.trim(),
+    tags: JSON.stringify(tags),
+  }).eq('id', id);
+  if (error) { showToast('خطأ في الحفظ', 'error'); return; }
+  showToast('تم الحفظ ✓', 'success');
+  closeExpEdit();
+  loadExperience();
+}
+
+async function deleteExp(id) {
+  if (!confirm('هل أنت متأكد من حذف الوظيفة؟')) return;
+  const { error } = await sb.from('experience').delete().eq('id', id);
+  if (error) { showToast('خطأ في الحذف', 'error'); return; }
+  showToast('تم الحذف ✓', 'success');
+  loadExperience();
+}
 
 // ══ CATEGORIES TAB ══
 async function saveCatLabels() {
