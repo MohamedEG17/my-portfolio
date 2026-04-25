@@ -129,7 +129,46 @@ nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;disp
 .stat-num{font-size:50px;font-weight:900;letter-spacing:-2px;line-height:1;margin-bottom:8px;background:linear-gradient(135deg,var(--blue),var(--blue2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .stat-lbl{font-size:12px;color:var(--muted);font-weight:500}
 
-/* ── ABOUT ── */
+/* ── EXPERIENCE ── */
+.exp-sec{padding:64px 64px;position:relative;z-index:1;border-top:1px solid var(--border)}
+.exp-title{font-size:clamp(28px,3.5vw,44px);font-weight:900;letter-spacing:-1.5px;margin-bottom:8px;color:#fff}
+.exp-title span{background:linear-gradient(135deg,var(--blue),var(--blue2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.exp-sub{font-size:13px;color:var(--muted);margin-bottom:40px}
+.exp-timeline{position:relative;padding-left:28px}
+.exp-timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--blue),var(--purple),var(--pink));border-radius:2px;opacity:.4}
+.exp-item{position:relative;margin-bottom:36px}
+.exp-item:last-child{margin-bottom:0}
+.exp-dot{position:absolute;left:-34px;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid;flex-shrink:0}
+.exp-item[data-col="blue"] .exp-dot{border-color:var(--blue);background:rgba(14,165,233,.3);box-shadow:0 0 10px rgba(14,165,233,.4)}
+.exp-item[data-col="purple"] .exp-dot{border-color:var(--purple);background:rgba(139,92,246,.3);box-shadow:0 0 10px rgba(139,92,246,.4)}
+.exp-item[data-col="pink"] .exp-dot{border-color:var(--pink);background:rgba(236,72,153,.3);box-shadow:0 0 10px rgba(236,72,153,.4)}
+.exp-item[data-col="amber"] .exp-dot{border-color:#F59E0B;background:rgba(245,158,11,.3);box-shadow:0 0 10px rgba(245,158,11,.4)}
+.exp-item[data-col="green"] .exp-dot{border-color:#10B981;background:rgba(16,185,129,.3);box-shadow:0 0 10px rgba(16,185,129,.4)}
+.exp-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px 22px;transition:all .3s;position:relative;overflow:hidden}
+.exp-item[data-col="blue"] .exp-card{border-color:rgba(14,165,233,.2)}
+.exp-item[data-col="purple"] .exp-card{border-color:rgba(139,92,246,.2)}
+.exp-item[data-col="pink"] .exp-card{border-color:rgba(236,72,153,.2)}
+.exp-item[data-col="amber"] .exp-card{border-color:rgba(245,158,11,.2)}
+.exp-item[data-col="green"] .exp-card{border-color:rgba(16,185,129,.2)}
+.exp-card:hover{transform:translateX(6px)}
+.exp-item[data-col="blue"] .exp-card:hover{background:rgba(14,165,233,.06)}
+.exp-item[data-col="purple"] .exp-card:hover{background:rgba(139,92,246,.06)}
+.exp-item[data-col="pink"] .exp-card:hover{background:rgba(236,72,153,.06)}
+.exp-item[data-col="amber"] .exp-card:hover{background:rgba(245,158,11,.06)}
+.exp-item[data-col="green"] .exp-card:hover{background:rgba(16,185,129,.06)}
+.exp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+.exp-role{font-size:15px;font-weight:700;color:#fff;line-height:1.3}
+.exp-date{font-size:11px;font-weight:600;color:var(--muted);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:3px 12px;white-space:nowrap;flex-shrink:0}
+.exp-company{font-size:13px;font-weight:600;margin-bottom:4px}
+.exp-item[data-col="blue"] .exp-company{color:var(--blue2)}
+.exp-item[data-col="purple"] .exp-company{color:#A78BFA}
+.exp-item[data-col="pink"] .exp-company{color:#F472B6}
+.exp-item[data-col="amber"] .exp-company{color:#FCD34D}
+.exp-item[data-col="green"] .exp-company{color:#34D399}
+.exp-loc{font-size:11px;color:rgba(255,255,255,.35);margin-bottom:10px}
+.exp-tags{display:flex;gap:6px;flex-wrap:wrap}
+.exp-tag{font-size:10px;font-weight:600;letter-spacing:.5px;border-radius:100px;padding:3px 10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5)}
+.exp-flag{font-size:14px;margin-left:4px}
 .about-sec{padding:64px 64px;position:relative;z-index:1;border-top:1px solid var(--border)}
 .about-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:center}
 .aph-wrap{position:relative;border-radius:24px;overflow:hidden;background:rgba(14,165,233,.05);border:1px solid rgba(14,165,233,.14)}
@@ -279,6 +318,13 @@ footer{padding:20px 64px;border-top:1px solid var(--border);display:flex;align-i
   .stat-num{font-size:36px}
   .stat-box{padding:20px 14px}
 
+  /* EXPERIENCE */
+  .exp-sec{padding:40px 18px}
+  .exp-timeline{padding-left:22px}
+  .exp-head{flex-direction:column;gap:6px}
+  .exp-date{align-self:flex-start}
+  .exp-card{padding:16px 18px}
+
   /* ABOUT */
   .about-sec{padding:40px 18px}
   .about-wrap{grid-template-columns:1fr;gap:24px}
@@ -334,6 +380,7 @@ footer{padding:20px 64px;border-top:1px solid var(--border);display:flex;align-i
   <div class="nl" id="nav-logo">Mohamed <span>Esmat</span></div>
   <ul class="nlinks">
     <li><a href="#folders">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -380,6 +427,134 @@ footer{padding:20px 64px;border-top:1px solid var(--border);display:flex;align-i
     <div class="stat-box"><div class="stat-num" id="st2">2+</div><div class="stat-lbl">Years Experience</div></div>
     <div class="stat-box"><div class="stat-num" id="st3">15+</div><div class="stat-lbl">Happy Clients</div></div>
     <div class="stat-box"><div class="stat-num" id="st4">100%</div><div class="stat-lbl">Satisfaction</div></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-sec reveal" id="experience">
+  <div class="exp-title">Work <span>Experience</span></div>
+  <div class="exp-sub">6+ years across Egypt, Kuwait & Saudi Arabia</div>
+  <div class="exp-timeline">
+
+    <div class="exp-item" data-col="blue">
+      <div class="exp-dot"></div>
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Motion Graphics Designer & Video Editor</div>
+          <div class="exp-date">Jul 2019 – Aug 2021</div>
+        </div>
+        <div class="exp-company">Enactus SU <span class="exp-flag">🇪🇬</span></div>
+        <div class="exp-loc">Sohag, Egypt</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Motion Graphics</span>
+          <span class="exp-tag">Video Editing</span>
+          <span class="exp-tag">Promotional Content</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item" data-col="purple">
+      <div class="exp-dot"></div>
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Motion Graphics Designer</div>
+          <div class="exp-date">May 2022 – Mar 2023</div>
+        </div>
+        <div class="exp-company">Yalla NightLife (YNL) <span class="exp-flag">🇪🇬</span></div>
+        <div class="exp-loc">Remote · Cairo, Egypt</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Social Media</span>
+          <span class="exp-tag">Branding</span>
+          <span class="exp-tag">Entertainment</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item" data-col="amber">
+      <div class="exp-dot"></div>
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Video Editor</div>
+          <div class="exp-date">Feb 2023 – Present</div>
+        </div>
+        <div class="exp-company">Socislnee Media <span class="exp-flag">🇰🇼</span></div>
+        <div class="exp-loc">Remote · Kuwait</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Medical Content</span>
+          <span class="exp-tag">Motion Graphics</span>
+          <span class="exp-tag">Campaigns</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item" data-col="pink">
+      <div class="exp-dot"></div>
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Motion Graphics Designer</div>
+          <div class="exp-date">Dec 2024 – Present</div>
+        </div>
+        <div class="exp-company">Artaholic <span class="exp-flag">🇸🇦</span><span class="exp-flag">🇪🇬</span></div>
+        <div class="exp-loc">Cairo, Egypt & Saudi Arabia</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Branding Animation</span>
+          <span class="exp-tag">Motion Graphics</span>
+          <span class="exp-tag">Campaigns</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item" data-col="amber">
+      <div class="exp-dot"></div>
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Video Editor</div>
+          <div class="exp-date">Jun 2024 – Oct 2024</div>
+        </div>
+        <div class="exp-company">Point <span class="exp-flag">🇸🇦</span> <span style="font-size:10px;font-weight:600;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:2px 8px;margin-left:4px">Ended</span></div>
+        <div class="exp-loc">Remote · Saudi Arabia</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Automotive</span>
+          <span class="exp-tag">Car Reviews</span>
+          <span class="exp-tag">Video Editing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item" data-col="green">
+      <div class="exp-dot"></div>
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Motion Graphics Designer & Video Editor</div>
+          <div class="exp-date">Oct 2024 – Present</div>
+        </div>
+        <div class="exp-company">WeDesigny <span class="exp-flag">🇵🇸</span></div>
+        <div class="exp-loc">Remote · Palestine</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Motion Design</span>
+          <span class="exp-tag">Video Editing</span>
+          <span class="exp-tag">Branding</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item" data-col="purple">
+      <div class="exp-dot"></div>
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Motion Graphics Designer</div>
+          <div class="exp-date">Jul 2025 – Present</div>
+        </div>
+        <div class="exp-company">Thrill. <span class="exp-flag">🇸🇦</span></div>
+        <div class="exp-loc">Remote · Saudi Arabia</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Branding Animation</span>
+          <span class="exp-tag">Motion Graphics</span>
+          <span class="exp-tag">Saudi Clients</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
